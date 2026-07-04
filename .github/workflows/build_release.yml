@@ -1,9 +1,13 @@
 name: 🔧 Build -> Package 📦
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch: # <-- ДОБАВЬТЕ ЭТУ СТРОКУ ДЛЯ ПОЯВЛЕНИЯ КНОПКИ
 
 env:
   # Only used for the cache key. Increment version to force clean build.
   GODOT_BASE_BRANCH: master
+
   # LLVM version
   MINGW_LLVM_VERSION: "20260616"
   # Hardcoding this seem to be the only way
