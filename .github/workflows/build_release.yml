@@ -62,8 +62,14 @@ jobs:
             sconsflags: ''
             os: 'ubuntu-22.04'
             cache-name: android-arm64
-
-          # iOS
+          - platform: android
+            arch: 'arm32'
+            gdnative_flags: 'android_arch=armv7'
+            sconsflags: ''
+            os: 'ubuntu-22.04'
+            cache-name: android-arm32
+           
+            # iOS
           - platform: ios
             arch: 'x86_64'
             gdnative_flags: 'ios_arch=x86_64'
