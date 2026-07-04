@@ -2,19 +2,15 @@ name: 🔧 Build -> Package 📦
 on:
   push:
   pull_request:
-  workflow_dispatch: # <-- ДОБАВЬТЕ ЭТУ СТРОКУ ДЛЯ ПОЯВЛЕНИЯ КНОПКИ
+  workflow_dispatch:
 
 env:
-  # Only used for the cache key. Increment version to force clean build.
   GODOT_BASE_BRANCH: master
-
-  # LLVM version
   MINGW_LLVM_VERSION: "20260616"
-  # Hardcoding this seem to be the only way
   ANDROID_NDK_ROOT: /usr/local/lib/android/sdk/ndk/28.1.13356709/
 
 jobs:
-   build:
+  build:
     runs-on: ${{ matrix.os }}
     name: 🔧 Build
     strategy:
@@ -144,7 +140,7 @@ jobs:
         if: ${{ matrix.platform == 'windows' && matrix.arch == 'arm64' }}
         run: |
           NAME=llvm-mingw-$MINGW_LLVM_VERSION-ucrt-ubuntu-22.04-x86_64
-          URL="https://github.com/mstorsjo/llvm-mingw/releases/download/$MINGW_LLVM_VERSION/$NAME.tar.xz"
+          URL="https://github.com"
           if [ ! -f $NAME.bz2 ]; then
             wget $URL
           fi
@@ -160,8 +156,6 @@ jobs:
           sudo update-alternatives --set i686-w64-mingw32-g++ /usr/bin/i686-w64-mingw32-g++-posix
           sudo update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix
           sudo update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
-          dpkg -l | grep ii | grep mingw
-          update-alternatives --get-selections | grep mingw
 
       - name: Install Linux build dependencies
         if: ${{ matrix.platform == 'linux' }}
@@ -192,7 +186,7 @@ jobs:
         if: ${{ matrix.platform == 'linux' }}
         run: |
           if [ ! -f ${{ matrix.buildroot }}.tar.bz2 ]; then
-            wget https://github.com/godotengine/buildroot/releases/download/godot-2023.08.x-4/${{ matrix.buildroot }}.tar.bz2
+            wget https://github.com{{ matrix.buildroot }}.tar.bz2
           fi
           tar -xjf ${{ matrix.buildroot }}.tar.bz2
           ${{ matrix.buildroot }}/relocate-sdk.sh
