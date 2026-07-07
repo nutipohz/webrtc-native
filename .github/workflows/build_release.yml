@@ -36,6 +36,7 @@ jobs:
             sconsflags: ''
             os: 'ubuntu-22.04'
             cache-name: android-arm32
+            skip_gdnative: true
            
             # iOS
           - platform: ios
